@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Infertek.BusyIndicator example.</title>
+        <link type="text/css" rel="stylesheet" href="../../build/debug/style/infertek.busyindicator.css" />
+    </head>
+    <body>
+        <button type="button" data-bind="click: onClick, enable: isEnabled">Show busy indicator</button>
+        <div data-bind="infertekBusyIndicator: isBusy1" style="width: 300px; height: 200px">
+            Busy panel
+        </div>
+        <div data-bind="infertekBusyIndicator: isBusy2" style="width: 300px; height: 200px">
+            Busy panel
+        </div>
+        <script type="text/javascript" src="../../libs/jquery-1.8.2.js"></script>
+        <script type="text/javascript" src="../../libs/knockout-2.2.0.js"></script>
+        <script type="text/javascript" src="../../build/debug/js/infertek.busyindicator.js"></script>
+        <script type="text/javascript" src="example.js"></script>
+    </body>
+</html>
