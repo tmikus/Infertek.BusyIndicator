@@ -40,6 +40,20 @@ var Infertek;
     };
 
     /**
+     * Extracts size from the size string like "20px".
+     * @param sizeString Size string.
+     * @return {Number} Size. Default 0.
+     * @private
+     */
+    var _extractSize = function (sizeString) {
+        if (sizeString && sizeString != "" && sizeString.endsWith("px")) {
+            var size = sizeString.substr(0, sizeString.length - 2);
+            return isNaN(size) ? 0 : parseInt(size);
+        }
+        return 0
+    };
+
+    /**
      * Positions specified overlay directly above specified DOM element.
      * @param overlay Overlay to be positioned.
      * @param $element Element above which this overlay should be positioned.
@@ -55,6 +69,17 @@ var Infertek;
         var windowScrollY = window.scrollY;
         var windowHeight = window.innerHeight;
         var windowWidth = window.innerWidth;
+
+        var topOffset = _extractSize($element.css("padding-top")) + _extractSize($element.css("margin-top"));
+        var bottomOffset = _extractSize($element.css("padding-bottom")) + _extractSize($element.css("margin-bottom"));
+        var leftOffset = _extractSize($element.css("padding-left")) + _extractSize($element.css("margin-left"));
+        var rightOffset = _extractSize($element.css("padding-right")) + _extractSize($element.css("margin-right"));
+
+//        elementPosition.top -= topOffset;
+//        elementPosition.left -= leftOffset;
+
+        elementHeight += topOffset + bottomOffset;
+        elementWidth += leftOffset + rightOffset;
 
         var isOutsideViewX = elementPosition.left >= windowWidth + windowScrollX ||
             elementPosition.left + elementWidth <= windowScrollX;
