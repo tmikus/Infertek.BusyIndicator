@@ -26,7 +26,7 @@ var Infertek;
                 continue;
             if (zIndex > maximumZIndex)
                 maximumZIndex = zIndex;
-        } while(!(currentElement = currentElement.parent()).is(document.body))
+        } while(currentElement.length && !(currentElement = currentElement.parent()).is(document.body))
         return maximumZIndex;
     };
 
@@ -48,7 +48,10 @@ var Infertek;
     var _extractSize = function (sizeString) {
         if (sizeString && sizeString != "" && sizeString.endsWith("px")) {
             var size = sizeString.substr(0, sizeString.length - 2);
-            return isNaN(size) ? 0 : parseInt(size);
+            if (!isNaN(size)) {
+                var convertedSize = parseInt(size);
+                return convertedSize < 0 ? 0 : convertedSize;
+            }
         }
         return 0
     };
